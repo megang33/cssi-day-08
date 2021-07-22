@@ -1,15 +1,14 @@
 const passcode = document.querySelector("#passcode");
 
 const getMessages = () => {
-    console.log("running");
-    const messagesRef = firebase.database().ref();
+    const messagesRef = firebase.database().ref(); //shorthand to get a reference to the firebase database
         messagesRef.on('value', (snapshot) => {
         const data = snapshot.val();
         // console.log(messagesRef);
         // console.log(data);
-        // for (const property in data) {
-        //     console.log(`${property}: ${data[property]}`);
-        // }
+        for (let key in data) {
+            console.log(key, data[key]);
+        }
         console.log(passcode.value);
     });
 }
