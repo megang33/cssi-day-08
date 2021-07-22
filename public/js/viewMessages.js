@@ -1,5 +1,6 @@
 const passcode = document.querySelector("#passcode");
 const passcodeInput = document.querySelector("#passcodeInput");
+const message = document.querySelector("#message");
 let count = 0;
 let error = false;
 
@@ -10,51 +11,42 @@ const getMessages = () => {
         console.log(data);
         // console.log(messagesRef);
         // console.log(data);
-    // while(count < 3){
         for (let key in data) {
             if (data[key].passcode === passcode.value){
                 console.log(data[key].passcode, data[key].message);
                 // alert(data[key]);
-                passcodeInput.innerHTML = `<div>
+                passcodeInput.classList.add("hidden");
+                message.innerHTML = `
                 <h1 class="title">${data[key].message}</h1>
-                <button class="button is-block is-primary is-medium is-rounded" onClick="reset()">Enter Another Passcode!</button>
-                </div>`
+                <button class="button is-block is-primary is-medium is-rounded" onClick="reset()">Enter Another Passcode!</button>`
             }
-        //     else{
-        //         error = true;
-        //     }
+            else{
+                error = true;
+            }
         }
         // console.log(passcode.value);
     //  }
-    //  if(error == true){
-    //         alert("no message is bound to this passcode, please enter a valid passcode");
-    //         count++;
-    //     }
     //  passcode.value=null;
     //  count = 0;
     //  passcodeInput.innerHTML = `<div>
     //             <h1 class="title">You have entered the wrong passcode 3 times, you can no longer enter a passcode.</h1>
     //             </div>`
     });
+    // if(count>3){
+    //     alert("you are a hacker, you cannot enter a password anymore");
+    //     passcodeInput.classList.add("hidden");
+    // }
+    if(error == true){
+            alert("no message is bound to this passcode, please enter a valid passcode");
+            passcode.value = null;
+            count++;
+    }
 }
 
-// const reset = () =>{
-//     passcodeInput.innerHTML = `<div id="passcodeInput" class="hero-body has-text-centered">
-//             <div class="login">
-//             <form action="javascript:void(0);">
-//                 <div class="field">
-//                     <div class="control">
-//                         <input class="input is-medium is-rounded" type="text" placeholder="What's the passcode?" id="passcode" required />
-//                     </div>
-//                 </div>
-//                 <button class="button is-block is-fullwidth is-primary is-medium is-rounded" type="submit" onclick="getMessages()">
-//                     Click Here
-//                 </button>
-//             </form>
-//             <br>
-//             </div>
-//         </div>`
-// }
+const reset = () =>{
+    passcode.value = null;
+    console.log("clicked");
+}
 
 const renderMessageAsHtml = (message) => {
     // Hide Input Form
