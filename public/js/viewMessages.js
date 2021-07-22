@@ -1,5 +1,4 @@
 const passcode = document.querySelector("#passcode");
-const passcodeInput = document.querySelector("#passcodeInput");
 
 const getMessages = () => {
     const messagesRef = firebase.database().ref(); //shorthand to get a reference to the firebase database
@@ -11,6 +10,7 @@ const getMessages = () => {
             if (key === passcode.value){
                 console.log(key, data[key]);
                 // alert(data[key]);
+                const passcodeInput = document.querySelector("#passcodeInput");
                 passcodeInput.innerHTML = `<h1 class="title">${data[key]}</h1>`
             }
         }
