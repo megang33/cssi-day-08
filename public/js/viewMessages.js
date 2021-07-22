@@ -7,21 +7,22 @@ const getMessages = () => {
     const messagesRef = firebase.database().ref(); //shorthand to get a reference to the firebase database
         messagesRef.on('value', (snapshot) => {
         const data = snapshot.val();
+        console.log(data);
         // console.log(messagesRef);
         // console.log(data);
     // while(count < 3){
         for (let key in data) {
-            if (key === passcode.value){
-                console.log(key, data[key]);
+            if (data[key].passcode === passcode.value){
+                console.log(data[key].passcode, data[key].message);
                 // alert(data[key]);
                 passcodeInput.innerHTML = `<div>
-                <h1 class="title">${data[key]}</h1>
+                <h1 class="title">${data[key].message}</h1>
                 <button class="button is-block is-primary is-medium is-rounded" onClick="reset()">Enter Another Passcode!</button>
                 </div>`
             }
-            else{
-                error = true;
-            }
+        //     else{
+        //         error = true;
+        //     }
         }
         // console.log(passcode.value);
     //  }
